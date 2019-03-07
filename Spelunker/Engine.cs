@@ -24,7 +24,14 @@ namespace Spelunker
         private void Render(object sender, UpdateEventArgs e)
         {
             _rootConsole.Clear();
+
+            foreach (var tile in _map.GetAllCells())
+            {
+                _rootConsole.Set(tile.X, tile.Y, RLColor.LightGray, null, (tile.IsWalkable ? '.' : '#'));
+            }
+
             _rootConsole.Set(_playerX, _playerY, RLColor.White, null, '@');
+
             _rootConsole.Draw();
         }
 
