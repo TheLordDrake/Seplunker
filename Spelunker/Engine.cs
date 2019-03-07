@@ -1,4 +1,5 @@
 ﻿using RLNET;
+using RogueSharp;
 
 namespace Spelunker
 {
@@ -6,11 +7,15 @@ namespace Spelunker
     {
         private readonly RLRootConsole _rootConsole;
 
+        private IMap _map;
+
         private int _playerX;
         private int _playerY;
 
-        public Engine(RLRootConsole console)
+        public Engine(RLRootConsole console, IMap map)
         {
+            _map = map;
+
             _rootConsole = console;
             _rootConsole.Render += Render;
             _rootConsole.Update += Update;
