@@ -1,5 +1,6 @@
-﻿using RLNET;
+using RLNET;
 using RogueSharp;
+using Spelunker.entities;
 
 namespace Spelunker
 {
@@ -9,12 +10,12 @@ namespace Spelunker
 
         private IMap _map;
 
-        private int _playerX;
-        private int _playerY;
+        private Player _player;
 
         public Engine(RLRootConsole console, IMap map)
         {
             _map = map;
+            _player = new Player();
 
             _rootConsole = console;
             _rootConsole.Render += Render;
@@ -30,7 +31,7 @@ namespace Spelunker
                 _rootConsole.Set(tile.X, tile.Y, RLColor.LightGray, null, (tile.IsWalkable ? '.' : '#'));
             }
 
-            _rootConsole.Set(_playerX, _playerY, RLColor.White, null, '@');
+            _rootConsole.Set(_player.X, _player.Y, _player.Color, null, Player.Icon);
 
             _rootConsole.Draw();
         }
@@ -44,16 +45,28 @@ namespace Spelunker
                 switch (keyPress.Key)
                 {
                     case RLKey.Up:
-                        _playerY--;
+                        if (_player.Y > 0 && _map.GetCell(_player.X, _player.Y - 1).IsWalkable)
+                        {
+                            _player.Y--;
+                        }
                         break;
                     case RLKey.Down:
-                        _playerY++;
+                        if (_player.Y < 50 && _map.GetCell(_player.X, _player.Y + 1).IsWalkable)
+                        {
+                            _player.Y++;
+                        }
                         break;
                     case RLKey.Left:
-                        _playerX--;
+                        if (_player.X > 0 && _map.GetCell(_player.X - 1, _player.Y).IsWalkable)
+                        {
+                            _player.X--;
+                        }
                         break;
                     case RLKey.Right:
-                        _playerX++;
+                        if (_player.X < 50 && _map.GetCell(_player.X + 1, _player.Y).IsWalkable)
+                        {
+                            _player.X++;
+                        }
                         break;
                 }
             }
