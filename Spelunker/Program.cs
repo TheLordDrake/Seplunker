@@ -12,11 +12,14 @@ namespace Spelunker
 
         public static void Main(string[] args)
         {
-            IMapCreationStrategy<Map> mapCreationStrategy = new RandomRoomsMapCreationStrategy<Map>(50, 30, 100, 7, 3);
+            IMapCreationStrategy<Map> mapCreationStrategy = new RandomRoomsMapCreationStrategy<Map>(50, 50, 150, 7, 3);
             _map = Map.Create(mapCreationStrategy);
 
             // Path to Font img, width of window in tiles, height of window in tiles, width of tile in pixels, height of tile in pixels
-            _rootConsole = new RLRootConsole("assets/terminal8x8.png", 60, 40, 8, 8);
+            _rootConsole = new RLRootConsole("assets/terminal8x8.png", 60, 60, 8, 8)
+            {
+                Title = "Spelunker"
+            };
             var engine = new Engine(_rootConsole, _map);
             _rootConsole.Run();
         }
