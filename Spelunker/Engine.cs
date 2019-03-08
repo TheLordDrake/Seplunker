@@ -1,4 +1,4 @@
-using RLNET;
+﻿using RLNET;
 using RogueSharp;
 using Spelunker.entities;
 
@@ -28,7 +28,10 @@ namespace Spelunker
 
             foreach (var tile in _map.GetAllCells())
             {
-                _rootConsole.Set(tile.X, tile.Y, RLColor.LightGray, null, (tile.IsWalkable ? '.' : '#'));
+                if (InRenderDistance(tile))
+                {
+                    _rootConsole.Set(tile.X, tile.Y, RLColor.LightGray, null, (tile.IsWalkable ? '.' : '#'));
+                }
             }
 
             _rootConsole.Set(_player.X, _player.Y, _player.Color, null, Player.Icon);
@@ -70,6 +73,17 @@ namespace Spelunker
                         break;
                 }
             }
+        }
+
+        private bool InRenderDistance(ICell tile)
+        {
+            int range = 10;
+            if ((tile.X <= _player.X + range && tile.X >= _player.X - range) && (tile.Y <= _player.Y + range && tile.Y >= _player.Y - range))
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
