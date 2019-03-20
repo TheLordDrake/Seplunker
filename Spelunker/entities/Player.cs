@@ -12,7 +12,7 @@ namespace Spelunker.entities
         public int X { get; set; }
         public int Y { get; set; }
 
-        public const char Icon = '@';
+        public static readonly char Icon = CharMap.Map[Entities.Player];
         public RLColor Color = RLColor.LightGreen;
 
         public Player()

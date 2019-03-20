@@ -12,6 +12,8 @@ namespace Spelunker
 
         private Player _player;
 
+        private const int RenderDistance = 15;
+
         public Engine(RLRootConsole console, IMap map)
         {
             _map = map;
@@ -77,8 +79,7 @@ namespace Spelunker
 
         private bool InRenderDistance(ICell tile)
         {
-            int range = 10;
-            if ((tile.X <= _player.X + range && tile.X >= _player.X - range) && (tile.Y <= _player.Y + range && tile.Y >= _player.Y - range))
+            if ((tile.X <= _player.X + RenderDistance && tile.X >= _player.X - RenderDistance) && (tile.Y <= _player.Y + RenderDistance && tile.Y >= _player.Y - RenderDistance))
             {
                 return true;
             }

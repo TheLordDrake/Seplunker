@@ -55,7 +55,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CharMap.cs" />
     <Compile Include="Engine.cs" />
+    <Compile Include="entities\Entities.cs" />
     <Compile Include="entities\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
